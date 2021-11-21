@@ -67,7 +67,7 @@ export class Producer {
     };
 
     const result = await this.sqs.sendMessageBatch(params).promise();
-    const failedMessagesBatch = failedMessages.concat(result.Failed.map((entry) => entry.Id));
+    const failedMessagesBatch = failedMessages.concat(result.Failed.map((entry) => entry.Id + " " + entry.Code + " " + entry.Message));
     const successfulMessagesBatch = successfulMessages.concat(result.Successful);
 
     if (endIndex < messages.length) {
